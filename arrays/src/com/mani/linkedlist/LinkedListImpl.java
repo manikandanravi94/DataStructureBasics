@@ -1,5 +1,7 @@
 package com.mani.linkedlist;
 
+import java.util.Arrays;
+
 /**
  * Created by gbs05347 on 10-04-2020.
  * time complexity of lookup of an element o(n)
@@ -79,27 +81,101 @@ public class LinkedListImpl {
         return null;
     }
 
-    public void deleteFirst(){
-        if(first!=null){
-            if(first.getNext()==null){
-                first=null;
-            }else{
-                first=first.getNext();
+    public void deleteFirst() {
+        if (first != null) {
+            if (first.getNext() == null) {
+                first = null;
+            } else {
+                first = first.getNext();
             }
         }
         size--;
     }
 
-    public void deleteLast(){
-        Node temp=first;
-        for(int i=0;i<size;i++){
-            if(first.getNext()==last){
+    public void deleteLast() {
+        Node temp = first;
+        Node temp1 = new Node();
+        for (int i = 0; i < size; i++) {
+            if (first.getNext() == last) {
                 first.setNext(null);
                 size--;
             }
-            first=first.getNext();
+            temp1 = first;
+            first = first.getNext();
         }
-        first=temp;
+        last = temp1;
+        first = temp;
+    }
+
+    public int sizeOf() {
+        return size;
+    }
+
+    public int[] toArray() {
+        int[] linkedListArray = new int[size];
+        Node temp = first;
+        for (int i = 0; i < size; i++) {
+            linkedListArray[i] = temp.getValue();
+            temp = temp.getNext();
+        }
+        return linkedListArray;
+    }
+
+    /* Task1
+    Reverse a linked list
+     */
+    public void reverseList() {
+        if (first == null)
+            return;
+        Node previous = first;
+        Node current = first.getNext();
+        while (current != null) {
+            Node next = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = next;
+        }
+        last = first;
+        last.setNext(null);
+        first = previous;
+    }
+
+    private int getKthNodeFromEnd(int k) {
+        if (k <= 0) {
+            throw new IllegalStateException();
+        }
+        if (k == 1 && last != null) {
+            return last.getValue();
+        }
+
+        Node temp = first;
+        int distance = k - 1;
+        Node current = first;
+
+        for (int i = 0; i < distance; i++) {
+            temp = temp.getNext();
+            if (temp == null) {
+                throw new IllegalArgumentException();
+            }
+        }
+        Node next = temp;
+
+        while (next != last) {
+            current = current.getNext();
+            next = next.getNext();
+        }
+        /* above while loop can be rewirtten in the below way too but the above way reduces the inner for loop
+*/
+//        while(next!=null){
+//            for (int i = 0; i < distance; i++) {
+//                if(next.getNext()==null){
+//                    return current.getValue();
+//                }
+//            current=current.getNext();
+//            next=next.getNext();
+//            }
+//        }
+        return current.getValue();
     }
 
     public static void main(String[] args) {
@@ -109,9 +185,11 @@ public class LinkedListImpl {
         linkedList.addFirst(20);
         linkedList.addFirst(30);
         linkedList.addFirst(30);
+        linkedList.addFirst(80);
         linkedList.addLast(40);
         linkedList.addLast(50);
         linkedList.print();
+        System.out.println("printing linked list kth node" + linkedList.getKthNodeFromEnd(5));
         System.out.println(linkedList.contains(30));
         System.out.println(linkedList.indexOf(40));
         linkedList.deleteFirst();
@@ -119,5 +197,11 @@ public class LinkedListImpl {
         linkedList.print();
         linkedList.deleteLast();
         linkedList.print();
+        System.out.println(linkedList.sizeOf());
+        System.out.println("converted to array: " + Arrays.toString(linkedList.toArray()));
+        linkedList.reverseList();
+        linkedList.print();
+        System.out.println(linkedList.getKthNodeFromEnd(1));
     }
+
 }
