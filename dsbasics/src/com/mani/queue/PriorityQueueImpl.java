@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 /**
  * Created by gbs05347 on 26-04-2020.
+ * Normally priority queue arranges the element in the ascending order. so we need to arrange the element in the ascending order
+ * thats the main logic of priority queue
+ * insert,retrieve,delete a element o(n)
  */
 public class PriorityQueueImpl {
 
@@ -45,6 +48,5 @@ public class PriorityQueueImpl {
         priorityQueue.enqueue(2);
         priorityQueue.enqueue(11);
         priorityQueue.print();
-
     }
 }

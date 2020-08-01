@@ -55,6 +55,8 @@ public class CircularQueueImpl {
         queue.enqueue(50);
         queue.dequeue();
         queue.enqueue(60);
+        queue.dequeue();
+        queue.enqueue(80);
         queue.print();
         queue.peek();
 
