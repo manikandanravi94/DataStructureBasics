@@ -18,9 +18,8 @@ public class CircularQueueImpl {
     }
 
     private void enqueue(int element){
-        first=last%size;
-        if(array[first]==0){
-        array[first]=element;
+        if(array[last%size]==0){
+        array[last%size]=element;
         }
         else{
             throw new IllegalStateException("queue is full, remove element to store newer one");
@@ -29,14 +28,14 @@ public class CircularQueueImpl {
     }
 
     private int dequeue(){
-        first=last%size;
-        int temp=array[first+1];
-        array[first]=0;
+        int temp=array[first%size];
+        array[first%size]=0;
+        first++;
         return temp;
     }
 
     private void peek(){
-        System.out.println(array[first+1]);
+        System.out.println(array[first%size]);
     }
 
 
@@ -48,7 +47,10 @@ public class CircularQueueImpl {
         CircularQueueImpl queue = new CircularQueueImpl(5);
         queue.enqueue(5);
         queue.enqueue(10);
+        queue.print();
         queue.enqueue(20);
+        queue.dequeue();
+        queue.print();
         queue.enqueue(30);
         queue.enqueue(40);
         queue.dequeue();
