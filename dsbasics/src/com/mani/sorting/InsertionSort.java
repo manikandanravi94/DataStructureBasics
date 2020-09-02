@@ -9,7 +9,11 @@ public class InsertionSort {
 
     public static void main(String[] args) {
         int[] a ={2,6,7,1,8};
-
+/* we have to start checking from index of 1 because there is no use of checking 0th index element as it dont
+ have any previous element.. while comparing the previous element if it tends to be bigger than the current element
+ we have to shift the element to its next index.. and finally copy the current element into older index of the
+ swapped element
+ */
         for(int i =1;i<a.length;i++){
             int current = a[i];
             int j=i-1;
