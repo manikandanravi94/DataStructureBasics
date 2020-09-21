@@ -31,6 +31,7 @@ public class MergeSort {
 
     private void merge(int[] left, int[] right, int[] a) {
         int i=0,j=0,k=0;
+//compare all the elements in the right array to the left array and store it in the same input array
 
         while(i< left.length&&j< right.length){
             if(left[i]<=right[j]){

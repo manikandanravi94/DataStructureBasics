@@ -9,8 +9,8 @@ public class SelectionSort {
 
     public static void main(String[] args) {
         int[] array2Sort ={2,6,7,1,8};
-
-
+//first consider oth element as the lowest value and start iterating the array and compare all the elements
+// replace the lowest value in the array to the current lowest value and store it in the older array.
         for(int i=0;i< array2Sort.length;i++){
             int lowest_value = array2Sort[i];
             int index=i;

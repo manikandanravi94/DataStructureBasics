@@ -61,6 +61,8 @@ public class QueueImpl {
     queue.isEmpty();
     queue.dequeue();
         queue.dequeue();
+        queue.print();
+        //we have first and last to repoint the elements instead of removing elements from array
     queue.customPrint();
     queue.peek();
     }
