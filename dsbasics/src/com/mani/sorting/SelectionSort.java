@@ -22,6 +22,7 @@ public class SelectionSort {
                 int temp=array2Sort[i];
                 array2Sort[i]=array2Sort[index];
                 array2Sort[index]=temp;
+                System.out.println(Arrays.toString(array2Sort));
             }
 
         }
