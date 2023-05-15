@@ -49,11 +49,15 @@ public class TreeImpl {
         }
         return false;
     }
-
+/*
+below is one way not to use too many iterative methods to solve the pre order
+ */
     public void preOrderTraversal(Node node) {
+        if(node==null)
+            return;
         System.out.println(node.value);
-        preTraversal(node.leftChild);
-        preTraversal(node.rightChild);
+        preOrderTraversal(node.leftChild);
+        preOrderTraversal(node.rightChild);
     }
 
     public void postOrderTraversal(Node node) {
@@ -69,12 +73,6 @@ public class TreeImpl {
 
     }
 
-    private void preTraversal(Node node) {
-        if (node != null) {
-            preOrderTraversal(node);
-        }
-    }
-
     private void postTraversal(Node node) {
         if (node != null) {
             postOrderTraversal(node);
@@ -85,6 +83,19 @@ public class TreeImpl {
         if (node != null) {
             inOrderTraversal(node);
         }
+    }
+
+    public int height(){
+        return height(this.root);
+    }
+
+    private int height(Node node) {
+        if(node==null)
+            return -1;
+        if(node.leftChild==null && node.rightChild==null){
+            return 0;
+        }
+        return 1+Math.max(height(node.leftChild),height(node.rightChild));
     }
 
     public static void main(String[] args) {
@@ -103,7 +114,7 @@ public class TreeImpl {
         tree.postOrderTraversal(tree.root);
         System.out.println("in Order Traversal");
         tree.inOrderTraversal(tree.root);
-
+        System.out.println("height of the tree: "+tree.height());
 
     }
 }
