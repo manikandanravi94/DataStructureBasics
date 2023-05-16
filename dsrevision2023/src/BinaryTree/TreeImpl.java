@@ -92,10 +92,33 @@ below is one way not to use too many iterative methods to solve the pre order
     private int height(Node node) {
         if(node==null)
             return -1;
-        if(node.leftChild==null && node.rightChild==null){
+        if(isLeaf(node)){
             return 0;
         }
         return 1+Math.max(height(node.leftChild),height(node.rightChild));
+    }
+
+    /*
+    To find a minimum value in a binary tree, we have to do the post order traversal. if it is a binary search tree, we can take return the left most value
+     */
+    public void min(){
+        System.out.println(getMinimumValue(this.root));
+    }
+
+    private int getMinimumValue(Node node){
+        if(node==null){
+            return Integer.MAX_VALUE;
+        }
+        if(isLeaf(node)){
+            return node.value;
+        }
+
+        return Math.min(Math.min(getMinimumValue(node.leftChild),getMinimumValue(node.rightChild)), node.value);
+
+    }
+
+    private static boolean isLeaf(Node node) {
+        return node.leftChild == null && node.rightChild == null;
     }
 
     public static void main(String[] args) {
@@ -115,6 +138,7 @@ below is one way not to use too many iterative methods to solve the pre order
         System.out.println("in Order Traversal");
         tree.inOrderTraversal(tree.root);
         System.out.println("height of the tree: "+tree.height());
+        tree.min();
 
     }
 }
