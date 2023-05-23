@@ -85,7 +85,9 @@ public class TreeImpl {
             inOrderTraversal(node);
         }
     }
-
+/*
+check equality can be done using recursive way
+ */
     public boolean checkEquality(Node tree, Node compareTree) {
         if(tree==null && compareTree==null)
             return true;
