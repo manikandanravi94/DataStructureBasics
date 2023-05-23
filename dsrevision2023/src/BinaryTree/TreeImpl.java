@@ -49,11 +49,12 @@ public class TreeImpl {
         }
         return false;
     }
-/*
-below is one way not to use too many iterative methods to solve the pre order
- */
+
+    /*
+    below is one way not to use too many iterative methods to solve the pre order
+     */
     public void preOrderTraversal(Node node) {
-        if(node==null)
+        if (node == null)
             return;
         System.out.println(node.value);
         preOrderTraversal(node.leftChild);
@@ -85,35 +86,45 @@ below is one way not to use too many iterative methods to solve the pre order
         }
     }
 
-    public int height(){
+    public boolean checkEquality(Node tree, Node compareTree) {
+        if(tree==null && compareTree==null)
+            return true;
+        if((tree!=null && compareTree==null)||(tree==null && compareTree!=null))
+            return false;
+      if(tree.value!=compareTree.value)
+          return false;
+        return checkEquality(tree.leftChild,compareTree.leftChild) && checkEquality(tree.rightChild,compareTree.rightChild);
+    }
+
+    public int height() {
         return height(this.root);
     }
 
     private int height(Node node) {
-        if(node==null)
+        if (node == null)
             return -1;
-        if(isLeaf(node)){
+        if (isLeaf(node)) {
             return 0;
         }
-        return 1+Math.max(height(node.leftChild),height(node.rightChild));
+        return 1 + Math.max(height(node.leftChild), height(node.rightChild));
     }
 
     /*
     To find a minimum value in a binary tree, we have to do the post order traversal. if it is a binary search tree, we can take return the left most value
      */
-    public void min(){
+    public void min() {
         System.out.println(getMinimumValue(this.root));
     }
 
-    private int getMinimumValue(Node node){
-        if(node==null){
+    private int getMinimumValue(Node node) {
+        if (node == null) {
             return Integer.MAX_VALUE;
         }
-        if(isLeaf(node)){
+        if (isLeaf(node)) {
             return node.value;
         }
 
-        return Math.min(Math.min(getMinimumValue(node.leftChild),getMinimumValue(node.rightChild)), node.value);
+        return Math.min(Math.min(getMinimumValue(node.leftChild), getMinimumValue(node.rightChild)), node.value);
 
     }
 
@@ -137,8 +148,17 @@ below is one way not to use too many iterative methods to solve the pre order
         tree.postOrderTraversal(tree.root);
         System.out.println("in Order Traversal");
         tree.inOrderTraversal(tree.root);
-        System.out.println("height of the tree: "+tree.height());
+        System.out.println("height of the tree: " + tree.height());
         tree.min();
+        TreeImpl tree1 = new TreeImpl();
+        tree1.insert(7);
+        tree1.insert(4);
+        tree1.insert(1);
+        tree1.insert(10);
+        tree1.insert(8);
+        tree1.insert(1);
+        tree1.insert(3);
+        System.out.println("two tree comparison : "+ tree.checkEquality(tree.root,tree1.root));
 
     }
 }
